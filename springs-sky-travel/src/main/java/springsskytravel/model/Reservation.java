@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "reservations")
 public class Reservation {
 
-    private enum Service {
+    public enum Service {
         NONE, HALF_BOARD, FULL_BOARD
     }
 
