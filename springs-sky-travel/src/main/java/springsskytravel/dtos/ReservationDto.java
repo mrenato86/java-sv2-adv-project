@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import springsskytravel.model.Journey;
 import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
 
@@ -22,5 +21,5 @@ public class ReservationDto {
     private int fullPrice;
     private List<Participant> participants;
 
-    private Journey journey;
+    private JourneyDto journey;
 }

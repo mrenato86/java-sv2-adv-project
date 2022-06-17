@@ -43,6 +43,20 @@ public class Journey {
     @Column(name = "price_per_participant")
     private int pricePerParticipant;
 
-    @OneToMany(mappedBy = "journey")
+    @OneToMany(mappedBy = "journey", cascade = CascadeType.REMOVE)
     private List<Reservation> reservations = new ArrayList<>();
+
+    public Journey(String destination, String description, Method method, LocalDate departureDate, int numberOfNights, int pricePerParticipant) {
+        this.destination = destination;
+        this.description = description;
+        this.method = method;
+        this.departureDate = departureDate;
+        this.numberOfNights = numberOfNights;
+        this.pricePerParticipant = pricePerParticipant;
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservation.setJourney(this);
+        this.reservations.add(reservation);
+    }
 }

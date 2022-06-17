@@ -1,0 +1,73 @@
+GET http://localhost:8080/api/journeys
+Accept: application/json
+
+###
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+###
+GET http://localhost:8080/api/journeys?after=2022-01-01&priceOrderBy=asc
+Accept: application/json
+
+###
+GET http://localhost:8080/api/journeys/4
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2022-08-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "",
+  "description": "",
+  "method": null,
+  "departureDate": "2021-07-21",
+  "numberOfNights": 0,
+  "pricePerParticipant": -10
+}
+
+###
+
+PUT http://localhost:8080/api/journeys/1
+Accept: application/json
+Content-Type: application/json
+
+{
+"numberOfNights": 5,
+"pricePerParticipant": 50001
+}
+
+###
+
+PUT http://localhost:8080/api/journeys/11
+Accept: application/json
+Content-Type: application/json
+
+{
+  "numberOfNights": -2,
+  "pricePerParticipant": 0
+}
+
+###
+DELETE http://localhost:8080/api/journeys/3
+Accept: application/json
+Content-Type: application/json
+
+###

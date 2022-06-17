@@ -42,4 +42,13 @@ public class Reservation {
 
     @ManyToOne
     private Journey journey;
+
+    public Reservation(String contactPerson, Service requestedService) {
+        this.contactPerson = contactPerson;
+        this.requestedService = requestedService;
+    }
+
+    public void addParticipant(Participant participant) {
+        this.participants.add(participant);
+    }
 }

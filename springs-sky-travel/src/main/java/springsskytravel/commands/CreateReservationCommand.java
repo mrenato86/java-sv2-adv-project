@@ -1,13 +1,23 @@
 package springsskytravel.commands;
 
-import springsskytravel.model.Journey;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
 
 import java.util.List;
 
-public class CreateReservationCommand extends ReservationCommand{
-    public CreateReservationCommand(String contactPerson, Reservation.Service requestedService, List<Participant> participants, Journey journey) {
-        super(contactPerson, requestedService, participants, journey);
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class CreateReservationCommand {
+
+    private String contactPerson;
+    private Reservation.Service requestedService;
+    private List<Participant> participants;
+
+    private long journeyId;
 }

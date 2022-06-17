@@ -1,11 +1,19 @@
 package springsskytravel.commands;
 
-import springsskytravel.model.Journey;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDate;
+import javax.validation.constraints.Positive;
 
-public class UpdateJourneyCommand extends JourneyCommand{
-    public UpdateJourneyCommand(String destination, String description, Journey.Method method, LocalDate departureDate, int numberOfNights, int pricePerParticipant) {
-        super(destination, description, method, departureDate, numberOfNights, pricePerParticipant);
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class UpdateJourneyCommand {
+    @Positive(message = "Number of nights must be positive")
+    private int numberOfNights;
+    @Positive(message = "Price must be positive")
+    private int pricePerParticipant;
 }

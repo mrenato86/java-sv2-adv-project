@@ -1,8 +1,8 @@
 create table participants
 (
-    reservation_id bigint  not null,
     full_name      varchar(255),
-    age            integer not null
+    age            integer not null,
+    reservation_id bigint  not null
 );
 
 alter table participants

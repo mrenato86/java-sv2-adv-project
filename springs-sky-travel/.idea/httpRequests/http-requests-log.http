@@ -1,0 +1,476 @@
+PUT http://localhost:8080/api/journeys/11
+Accept: application/json
+Content-Type: application/json
+
+{
+  "numberOfNights": -2,
+  "pricePerParticipant": 0
+}
+
+<> 2022-06-17T190523.400.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "",
+  "description": "",
+  "method": null,
+  "departureDate": "2021-07-21",
+  "numberOfNights": 0,
+  "pricePerParticipant": -10
+}
+
+<> 2022-06-17T190512.400.json
+
+###
+
+PUT http://localhost:8080/api/journeys/11
+Accept: application/json
+Content-Type: application/json
+
+{
+  "numberOfNights": -2,
+  "pricePerParticipant": 0
+}
+
+<> 2022-06-17T190200.400.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "",
+  "description": "",
+  "method": null,
+  "departureDate": "2021-07-21",
+  "numberOfNights": 0,
+  "pricePerParticipant": -10
+}
+
+<> 2022-06-17T190107.400.json
+
+###
+
+PUT http://localhost:8080/api/journeys/11
+Accept: application/json
+Content-Type: application/json
+
+{
+  "numberOfNights": -2,
+  "pricePerParticipant": 0
+}
+
+<> 2022-06-17T190034.200.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2021-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T185936.400.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2022-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T185929.201.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "",
+  "description": "",
+  "method": null,
+  "departureDate": "2021-07-21",
+  "numberOfNights": 0,
+  "pricePerParticipant": -10
+}
+
+<> 2022-06-17T185907.400.json
+
+###
+
+GET http://localhost:8080/api/journeys
+Accept: application/json
+
+<> 2022-06-17T185501.200.json
+
+###
+
+GET http://localhost:8080/api/journeys/4
+Accept: application/json
+
+<> 2022-06-17T185441.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01&priceOrderBy=asc
+Accept: application/json
+
+<> 2022-06-17T185427.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01&priceOrderBy=asc
+Accept: application/json
+
+<> 2022-06-17T185416.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01&priceOrderBy=desc
+Accept: application/json
+
+<> 2022-06-17T185404.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2021-01-01
+Accept: application/json
+
+<> 2022-06-17T185341.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderBy=desc
+Accept: application/json
+
+<> 2022-06-17T185325.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderBy=asc
+Accept: application/json
+
+<> 2022-06-17T185306.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderby=asc
+Accept: application/json
+
+<> 2022-06-17T185242.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderby="asc"
+Accept: application/json
+
+<> 2022-06-17T185227.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T185214.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderby="asc"
+Accept: application/json
+
+<> 2022-06-17T185031.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderby="desc"
+Accept: application/json
+
+<> 2022-06-17T185017.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?priceOrderby=desc
+Accept: application/json
+
+<> 2022-06-17T185003.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01&priceOrderby=desc
+Accept: application/json
+
+<> 2022-06-17T184940.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01&priceOrderby=asc
+Accept: application/json
+
+<> 2022-06-17T184831.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01&pricerOrderby=asc
+Accept: application/json
+
+<> 2022-06-17T184818.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T184722.200.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2021-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T184655.201.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2021-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T184654.201.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2021-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T184653.201.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2021-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T184652.201.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T184639.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-09-01
+Accept: application/json
+
+<> 2022-06-17T184626.200.json
+
+###
+
+DELETE http://localhost:8080/api/journeys/3
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-09-01
+Accept: application/json
+
+<> 2022-06-17T183220.200.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2022-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 1000
+}
+
+<> 2022-06-17T183215.201.json
+
+###
+
+POST http://localhost:8080/api/journeys
+Accept: application/json
+Content-Type: application/json
+
+{
+  "destination": "Rome",
+  "description": "Nice sightseeing",
+  "method": "BUS",
+  "departureDate": "2022-07-21",
+  "numberOfNights": 1,
+  "pricePerParticipant": 120000
+}
+
+<> 2022-06-17T183210.201.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-09-01
+Accept: application/json
+
+<> 2022-06-17T183148.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T183135.200.json
+
+###
+
+GET http://localhost:8080/api/journeys
+Accept: application/json
+
+<> 2022-06-17T183116.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T183032.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-1-1
+Accept: application/json
+
+<> 2022-06-17T183022.400.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T182954.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T181732.200.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-01-01
+Accept: application/json
+
+<> 2022-06-17T181648.400.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-1-1
+Accept: application/json
+
+<> 2022-06-17T181628.400.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-1-1
+Accept: application/json
+
+<> 2022-06-17T181526.400.json
+
+###
+
+GET http://localhost:8080/api/journeys?after=2022-1-1
+Accept: application/json
+
+<> 2022-06-17T181510.400.json
+
+###
+
+GET http://localhost:8080/api/journeys/1
+Accept: application/json
+
+<> 2022-06-17T180535.404.json
+
+###
+
+GET http://localhost:8080/api/journeys/4
+Accept: application/json
+
+<> 2022-06-17T180528.200.json
+
+###
+
+DELETE http://localhost:8080/api/journeys/2
+Accept: application/json
+Content-Type: application/json
+
+###
+
