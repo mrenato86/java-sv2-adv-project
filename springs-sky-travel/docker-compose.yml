@@ -20,6 +20,6 @@ services:
     depends_on:
       - travel-mariadb
     environment:
-      SPRING_DATASOURCE_URL: 'jdbc:mariadb://hello-mariadb/travel?useUnicode=true'
+      SPRING_DATASOURCE_URL: 'jdbc:mariadb://travel-mariadb/travel?useUnicode=true'
     #entrypoint: ['./wait-for-it.sh', '-t', '120', 'hello-mariadb:3306', '--', 'java', 'org.springframework.boot.loader.JarLauncher']
     entrypoint: ['java', 'org.springframework.boot.loader.JarLauncher']

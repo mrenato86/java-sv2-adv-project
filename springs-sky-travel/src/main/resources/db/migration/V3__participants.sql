@@ -1,8 +1,9 @@
-CREATE TABLE IF NOT EXISTS `participants`
+create table participants
 (
-    `name`           varchar(255) DEFAULT NULL,
-    `age`            int(11)    NOT NULL,
-    `reservation_id` bigint(20) NOT NULL,
-    KEY FK_PARTICIPANTS_ON_RESERVATION (`reservation_id`),
-    CONSTRAINT FK_PARTICIPANTS_ON_RESERVATION FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`id`)
+    reservation_id bigint  not null,
+    full_name      varchar(255),
+    age            integer not null
 );
+
+alter table participants
+    add constraint FK_PARTICIPANTS_ON_RESERVATION foreign key (reservation_id) references reservations (id);

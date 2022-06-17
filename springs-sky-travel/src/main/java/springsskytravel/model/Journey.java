@@ -27,9 +27,11 @@ public class Journey {
     private Long id;
     private String destination;
 
+    @Column(name = "journey_description")
     private String description;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "journey_method")
     private Method method;
 
     @Column(name = "departure_date")

@@ -1,11 +1,12 @@
-CREATE TABLE IF NOT EXISTS `reservations`
+create table reservations
 (
-    `id`                bigint(20) NOT NULL AUTO_INCREMENT,
-    `contact_person`    varchar(255) DEFAULT NULL,
-    `requested_service` varchar(255) DEFAULT NULL,
-    `full_price`        int(11)      DEFAULT NULL,
-    `journey_id`        bigint(20)   DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    KEY FK_RESERVATIONS_ON_JOURNEY (`journey_id`),
-    CONSTRAINT FK_RESERVATIONS_ON_JOURNEY FOREIGN KEY (`journey_id`) REFERENCES `journeys` (`id`)
+    id                bigint not null auto_increment,
+    contact_person    varchar(255),
+    requested_service varchar(255),
+    full_price        integer,
+    journey_id        bigint,
+    primary key (id)
 );
+
+alter table reservations
+    add constraint FK_RESERVATIONS_ON_JOURNEY foreign key (journey_id) references journeys (id);

@@ -25,6 +25,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "contact_person")
     private String contactPerson;
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +37,7 @@ public class Reservation {
 
     @ElementCollection
     @CollectionTable(name = "participants", joinColumns = @JoinColumn(name = "reservation_id"))
+    @AttributeOverride(name = "name", column = @Column(name = "full_name"))
     private List<Participant> participants = new ArrayList<>();
 
     @ManyToOne
