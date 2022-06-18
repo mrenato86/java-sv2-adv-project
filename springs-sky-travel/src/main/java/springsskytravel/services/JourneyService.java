@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -25,18 +26,11 @@ public class JourneyService {
     private ModelMapper modelMapper;
 
     public List<JourneyDto> readAllJourney(Optional<LocalDate> after, Optional<String> priceOrderBy) {
-        List<Journey> result;
-        if (priceOrderBy.isEmpty()) {
-            result = journeyRepository.getJourneysAfterDate(after);
-            System.out.println("here");
-        } else {
-            System.out.println("herelse");
-            result = switch (priceOrderBy.get()) {
-                case "asc" -> journeyRepository.getJourneysAfterDateOrderedPriceAsc(after);
-                case "desc" -> journeyRepository.getJourneysAfterDateOrderedPriceDesc(after);
-                default -> journeyRepository.getJourneysAfterDate(after);
-            };
-        }
+        List<Journey> result = switch (priceOrderBy.orElse("unordered")) {
+            case "asc" -> journeyRepository.getJourneysAfterDateOrderedByPriceAsc(after);
+            case "desc" -> journeyRepository.getJourneysAfterDateOrderedByPriceDesc(after);
+            default -> journeyRepository.getJourneysAfterDate(after);
+        };
         return result.stream()
                 .map(j -> modelMapper.map(j, JourneyDto.class))
                 .collect(Collectors.toList());
@@ -44,6 +38,10 @@ public class JourneyService {
 
     public JourneyDto readJourneyById(long id) {
         return modelMapper.map(fetchJourneyById(id), JourneyDto.class);
+    }
+
+    public Set<String> readDistinctDestinations() {
+        return journeyRepository.getDistinctDestinations();
     }
 
     public JourneyDto createJourney(CreateJourneyCommand command) {

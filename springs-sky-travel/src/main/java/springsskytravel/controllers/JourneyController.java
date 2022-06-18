@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @AllArgsConstructor
 @RestController
@@ -26,9 +27,14 @@ public class JourneyController {
         return journeyService.readAllJourney(after, priceOrderBy);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public JourneyDto readJourney(@PathVariable long id) {
         return journeyService.readJourneyById(id);
+    }
+
+    @GetMapping("/destinations")
+    public Set<String> readDistinctDestinations() {
+        return journeyService.readDistinctDestinations();
     }
 
     @PostMapping
@@ -37,12 +43,12 @@ public class JourneyController {
         return journeyService.createJourney(command);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public JourneyDto updateJourney(@PathVariable long id, @Valid @RequestBody UpdateJourneyCommand command) {
         return journeyService.updateJourneyById(id, command);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteJourney(@PathVariable long id) {
         journeyService.deleteJourneyById(id);

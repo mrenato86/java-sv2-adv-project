@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import springsskytravel.services.rules.ReservationRuleSet;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -50,5 +51,9 @@ public class Reservation {
 
     public void addParticipant(Participant participant) {
         this.participants.add(participant);
+    }
+
+    public void calculateFullPrice(ReservationRuleSet reservationRuleSet) {
+        this.fullPrice = reservationRuleSet.calculateFullPrice(this);
     }
 }

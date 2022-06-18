@@ -7,6 +7,8 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import springsskytravel.services.rules.BasicReservationRuleSet;
+import springsskytravel.services.rules.ReservationRuleSet;
 
 @SpringBootApplication
 public class SpringsSkyTravelApplication {
@@ -16,7 +18,7 @@ public class SpringsSkyTravelApplication {
     }
 
     @Bean
-    public ModelMapper getModelMapper(){
+    public ModelMapper getModelMapper() {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return mapper;
@@ -29,6 +31,11 @@ public class SpringsSkyTravelApplication {
                         .title("Spring's Sky Travel API")
                         .version("1.0")
                         .description("Operations with journeys and reservations"));
+    }
+
+    @Bean
+    public ReservationRuleSet getReservationRuleSet() {
+        return new BasicReservationRuleSet();
     }
 
 }
