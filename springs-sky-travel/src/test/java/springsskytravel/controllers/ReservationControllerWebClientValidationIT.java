@@ -1,9 +1,9 @@
 package springsskytravel.controllers;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 import springsskytravel.commands.CreateJourneyCommand;
@@ -15,7 +15,6 @@ import springsskytravel.model.Journey;
 import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
 import springsskytravel.services.JourneyService;
-import springsskytravel.services.ReservationService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +22,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(statements = {"delete from participants", "delete from reservations", "delete from journeys"})
 class ReservationControllerWebClientValidationIT {
 
     @Autowired
@@ -30,13 +30,6 @@ class ReservationControllerWebClientValidationIT {
 
     @Autowired
     JourneyService journeyService;
-
-    @Autowired
-    ReservationService reservationService;
-
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void testReadReservationNotFound() {
@@ -129,7 +122,6 @@ class ReservationControllerWebClientValidationIT {
     void testAddInvalidParticipant() {
         ReservationDto testReservationDto = createTestReservation();
 
-        assert testReservationDto != null;
         webClient.post()
                 .uri("/api/reservations/{id}/participants", testReservationDto.getId())
                 .bodyValue(new UpdateReservationParticipantsCommand("", -20))
@@ -146,7 +138,6 @@ class ReservationControllerWebClientValidationIT {
     void testUpdateReservationWithInvalidData() {
         ReservationDto testReservationDto = createTestReservation();
 
-        assert testReservationDto != null;
         webClient.put()
                 .uri("/api/reservations/{id}", testReservationDto.getId())
                 .bodyValue(new UpdateReservationCommand(null))
@@ -163,7 +154,6 @@ class ReservationControllerWebClientValidationIT {
     void testDeleteReservationNotAllowed() {
         ReservationDto testReservationDto = createTestReservation();
 
-        assert testReservationDto != null;
         webClient.delete()
                 .uri("/api/reservations/{id}", testReservationDto.getId())
                 .exchange()
@@ -178,7 +168,12 @@ class ReservationControllerWebClientValidationIT {
         CreateReservationCommand romeReservation = new CreateReservationCommand("Agent2", Reservation.Service.NONE,
                 List.of(new Participant("Adult", 38)), romeId);
 
-        return reservationService.createReservation(romeReservation);
+        return webClient.post()
+                .uri("/api/reservations")
+                .bodyValue(romeReservation)
+                .exchange()
+                .expectBody(ReservationDto.class)
+                .returnResult().getResponseBody();
     }
 
 

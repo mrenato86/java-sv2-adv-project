@@ -3,6 +3,7 @@ package springsskytravel.controllers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 import springsskytravel.commands.CreateJourneyCommand;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(statements = {"delete from participants", "delete from reservations", "delete from journeys"})
 class JourneyControllerWebClientValidationIT {
 
     @Autowired
@@ -95,15 +97,13 @@ class JourneyControllerWebClientValidationIT {
 
     @Test
     void testUpdateJourneyWithInvalidData() {
-        JourneyDto testJourneyDto = webClient
-                .post()
+        JourneyDto testJourneyDto = webClient.post()
                 .uri("/api/journeys")
                 .bodyValue(new CreateJourneyCommand("Rome", "Last minute", Journey.Method.BUS, LocalDate.now().plusDays(6), 1, 20_000))
                 .exchange()
                 .expectBody(JourneyDto.class)
                 .returnResult().getResponseBody();
 
-        assert testJourneyDto != null;
         webClient.put()
                 .uri("/api/journeys/{id}", testJourneyDto.getId())
                 .bodyValue(new UpdateJourneyCommand(-2, 0))
