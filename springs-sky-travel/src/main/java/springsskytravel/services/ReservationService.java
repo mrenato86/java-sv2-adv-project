@@ -11,6 +11,7 @@ import springsskytravel.dtos.ReservationDto;
 import springsskytravel.exceptions.JourneyNotFoundException;
 import springsskytravel.exceptions.ReservationDeleteNotAllowedException;
 import springsskytravel.exceptions.ReservationNotFoundException;
+import springsskytravel.exceptions.ReservationToPastJourneyException;
 import springsskytravel.model.Journey;
 import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
@@ -54,6 +55,9 @@ public class ReservationService {
                 .orElseThrow(() -> new JourneyNotFoundException(command.getJourneyId()));
         Reservation reservation = modelMapper.map(command, Reservation.class);
         journey.addReservation(reservation);
+        if (!reservationRuleSet.isDepartureDateAccepted(reservation)) {
+            throw new ReservationToPastJourneyException();
+        }
         reservation.calculateFullPrice(reservationRuleSet);
         return modelMapper.map(reservationRepository.save(reservation), ReservationDto.class);
     }

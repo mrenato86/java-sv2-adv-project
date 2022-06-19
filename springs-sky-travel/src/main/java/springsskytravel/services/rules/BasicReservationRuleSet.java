@@ -8,6 +8,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class BasicReservationRuleSet implements ReservationRuleSet {
 
+    private static final boolean PAST_RESERVATION_ALLOWED = false;
     private static final int DELETE_NOT_ELIGIBLE = 3;
     private static final int LAST_MINUTE_ELIGIBLE = 7;
     private static final int YOUNG_AGE_LIMIT = 18;
@@ -21,6 +22,13 @@ public class BasicReservationRuleSet implements ReservationRuleSet {
         LocalDate departure = reservation.getJourney().getDepartureDate();
         long daysBetween = LocalDate.now().until(departure, DAYS);
         return daysBetween > DELETE_NOT_ELIGIBLE;
+    }
+
+    @Override
+    public boolean isDepartureDateAccepted(Reservation reservation) {
+        LocalDate departure = reservation.getJourney().getDepartureDate();
+        long daysBetween = LocalDate.now().until(departure, DAYS);
+        return PAST_RESERVATION_ALLOWED || daysBetween >= 0;
     }
 
     @Override
