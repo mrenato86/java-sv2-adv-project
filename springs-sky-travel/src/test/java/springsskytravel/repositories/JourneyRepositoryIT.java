@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import springsskytravel.model.Journey;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +23,7 @@ class JourneyRepositoryIT {
     @BeforeEach
     void setUp() {
         testJourney = repository.save(new Journey("Hawaii", "Nice Vacation", Journey.Method.PLANE, LocalDate.parse("2022-08-21"), 7, 100_000));
-        repository.save(new Journey("Rome", "Nice sightseeing", Journey.Method.BUS, LocalDate.parse("2022-07-21"), 1, 20_000));
+        repository.save(new Journey("Rome", "Nice sightseeing", Journey.Method.BUS, LocalDate.parse("2021-07-21"), 1, 20_000));
         repository.save(new Journey("Hallstatt", "Romantic Weekend", Journey.Method.PLANE, LocalDate.parse("2022-08-01"), 3, 80_000));
     }
 
@@ -55,5 +57,44 @@ class JourneyRepositoryIT {
 
         assertThat(repository.findAll())
                 .isEmpty();
+    }
+
+    @Test
+    void testGetJourneysAfterDateOrderedByPriceDesc() {
+        List<Journey> result = repository.getJourneysAfterDateOrderedByPriceDesc(Optional.of(LocalDate.parse("2022-01-01")));
+
+        assertThat(result)
+                .hasSize(2)
+                .extracting(Journey::getPricePerParticipant)
+                .containsExactly(100000, 80000);
+    }
+
+    @Test
+    void testGetJourneysAfterDateOrderedByPriceAsc() {
+        List<Journey> result = repository.getJourneysAfterDateOrderedByPriceAsc(Optional.of(LocalDate.parse("2022-01-01")));
+
+        assertThat(result)
+                .hasSize(2)
+                .extracting(Journey::getPricePerParticipant)
+                .containsExactly(80000, 100000);
+    }
+
+    @Test
+    void testGetJourneysAfterDate() {
+        List<Journey> result = repository.getJourneysAfterDate(Optional.of(LocalDate.parse("2022-08-05")));
+
+        assertThat(result)
+                .hasSize(1)
+                .extracting(Journey::getDestination)
+                .containsOnly("Hawaii");
+    }
+
+    @Test
+    void testGetDistinctDestinations() {
+        repository.save(new Journey("Rome", "Second Trip", Journey.Method.BUS, LocalDate.parse("2021-07-21"), 1, 20_000));
+
+        assertThat(repository.getDistinctDestinations())
+                .hasSize(3)
+                .containsExactlyInAnyOrder("Rome", "Hallstatt", "Hawaii");
     }
 }

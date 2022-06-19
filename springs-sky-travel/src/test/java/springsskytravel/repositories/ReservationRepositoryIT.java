@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -57,5 +59,11 @@ public class ReservationRepositoryIT {
 
         assertThat(repository.findAll())
                 .isEmpty();
+    }
+
+    @Test
+    void testGetReservationsWithParticipantsLessThan() {
+        assertThat(repository.getReservationsWithParticipantsLessThan(Optional.of(1)))
+                .hasSize(2);
     }
 }
