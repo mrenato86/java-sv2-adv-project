@@ -20,28 +20,28 @@ import java.time.LocalDate;
 public class CreateJourneyCommand {
 
     @NotBlank(message = "Destination must be present")
-    @Schema(description = "Destination: ", example = "Rome")
+    @Schema(description = "Destination", example = "Rome")
     private String destination;
 
     @NotBlank(message = "Description must be present")
-    @Schema(description = "Description: ", example = "Weekend")
+    @Schema(description = "Description", example = "Weekend")
     private String description;
 
     @NotNull(message = "Journey method must be present")
-    @Schema(description = "Journey method: ", example = "PLANE")
+    @Schema(description = "Journey method", example = "PLANE")
     private Journey.Method method;
 
     @FutureOrPresent(message = "Departure date in the past is not allowed")
     @NotNull(message = "Departure date must be present")
-    @Schema(description = "Date of departure: ", example = "2025-08-15")
+    @Schema(description = "Date of departure", example = "2025-08-15")
     private LocalDate departureDate;
 
     @Positive(message = "Number of nights must be positive")
-    @Schema(description = "Number of nights: ", example = "7")
+    @Schema(description = "Number of nights", example = "7")
     private int numberOfNights;
 
     @Positive(message = "Price must be positive")
-    @Schema(description = "Price per participant: ", example = "100000")
+    @Schema(description = "Price per participant", example = "100000")
     private int pricePerParticipant;
 
 }

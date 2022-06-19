@@ -15,10 +15,10 @@ import javax.validation.constraints.Positive;
 public class UpdateJourneyCommand {
 
     @Positive(message = "Number of nights must be positive")
-    @Schema(description = "Number of nights: ", example = "7")
+    @Schema(description = "Number of nights", example = "7")
     private int numberOfNights;
 
     @Positive(message = "Price must be positive")
-    @Schema(description = "Price per participant: ", example = "100000")
+    @Schema(description = "Price per participant", example = "100000")
     private int pricePerParticipant;
 }

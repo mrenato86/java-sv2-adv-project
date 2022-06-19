@@ -44,6 +44,8 @@ public class ReservationController {
     @Operation(summary = "Creates a reservation")
     @ApiResponse(responseCode = "201", description = "Reservation has been created")
     @ApiResponse(responseCode = "400", description = "Constraint violation")
+    @ApiResponse(responseCode = "403", description = "Reservation date not accepted")
+    @ApiResponse(responseCode = "404", description = "Linked Journey not found")
     public ReservationDto createReservation(@Valid @RequestBody CreateReservationCommand command) {
         return reservationService.createReservation(command);
     }

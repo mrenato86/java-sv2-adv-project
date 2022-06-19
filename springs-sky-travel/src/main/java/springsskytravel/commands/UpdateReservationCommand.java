@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class UpdateReservationCommand {
 
     @NotNull(message = "Requested Service must be present")
-    @Schema(description = "Type of service: ", example = "HALF_BOARD")
+    @Schema(description = "Type of service", example = "HALF_BOARD")
     private Reservation.Service requestedService;
 
 }
