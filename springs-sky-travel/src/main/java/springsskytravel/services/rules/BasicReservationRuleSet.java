@@ -41,10 +41,7 @@ public class BasicReservationRuleSet implements ReservationRuleSet {
     private boolean isEligibleToLastMinute(Reservation reservation) {
         LocalDate departure = reservation.getJourney().getDepartureDate();
         long daysBetween = LocalDate.now().until(departure, DAYS);
-        if (daysBetween < 0) {
-            throw new IllegalArgumentException("Invalid calculation");
-        }
-        return daysBetween <= LAST_MINUTE_ELIGIBLE;
+        return daysBetween >= 0 && daysBetween <= LAST_MINUTE_ELIGIBLE;
     }
 
     private int calculateBoardPrice(Reservation reservation) {
