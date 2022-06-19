@@ -1,7 +1,6 @@
 package springsskytravel.commands;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +28,7 @@ public class CreateReservationCommand {
     private Reservation.Service requestedService;
 
     @Size(min = 1, message = "At least one participant must be added")
+    @NotNull(message = "Participant list must be present")
     @Schema(description = "List of participants: ")
     private List<Participant> participants;
 

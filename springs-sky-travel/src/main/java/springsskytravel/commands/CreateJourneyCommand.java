@@ -32,6 +32,7 @@ public class CreateJourneyCommand {
     private Journey.Method method;
 
     @FutureOrPresent(message = "Departure date in the past is not allowed")
+    @NotNull(message = "Departure date must be present")
     @Schema(description = "Date of departure: ", example = "2025-08-15")
     private LocalDate departureDate;
 
