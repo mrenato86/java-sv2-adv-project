@@ -83,7 +83,7 @@ Az adatbázis felépítése:
 ![diagram](db.png)
 
 
-Az alkalmazás indítható Jar-ként, vagy építhető belőle rétegezett Docker kontainer a mellékelt a Dockerfile segítségével, továbbá Docker Compose-hoz is adva van a szükséges konfigurációs állomány.
+Az alkalmazás indítható Jar-ként, vagy építhető belőle rétegezett Docker container a mellékelt a Dockerfile segítségével, továbbá Docker Compose-hoz is adva van a szükséges konfigurációs állomány.
 
 A foglalások szabályait, és az árszámítás módját bővíteni lehet a `ReservationRuleSet` interfész implementálásval, esetleges bővítésével, így az üzleti logika adott keretek között rugalmas lehet, ha erre később igény van.
 
