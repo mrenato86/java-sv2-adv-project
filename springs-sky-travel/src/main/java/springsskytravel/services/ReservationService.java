@@ -3,7 +3,6 @@ package springsskytravel.services;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import springsskytravel.commands.CreateReservationCommand;
 import springsskytravel.commands.UpdateReservationCommand;
 import springsskytravel.commands.UpdateReservationParticipantsCommand;
@@ -50,7 +49,7 @@ public class ReservationService {
         return modelMapper.map(fetchReservationById(id), ReservationDto.class);
     }
 
-    public ReservationDto createReservation(@RequestBody CreateReservationCommand command) {
+    public ReservationDto createReservation(CreateReservationCommand command) {
         Journey journey = journeyRepository.findById(command.getJourneyId())
                 .orElseThrow(() -> new JourneyNotFoundException(command.getJourneyId()));
         Reservation reservation = modelMapper.map(command, Reservation.class);

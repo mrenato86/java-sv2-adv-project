@@ -20,7 +20,7 @@ import java.util.List;
 public class CreateReservationCommand {
 
     @NotBlank(message = "Contact Name must be provided")
-    @Schema(description = "Contact name", example = "John Doe")
+    @Schema(description = "Contact name", example = "Travel Agent")
     private String contactPerson;
 
     @NotNull(message = "Requested Service must be present")
@@ -29,7 +29,7 @@ public class CreateReservationCommand {
 
     @Size(min = 1, message = "At least one participant must be added")
     @NotNull(message = "Participant list must be present")
-    @Schema(description = "List of participants")
+    @Schema(description = "List of participants", example = "[{\"name\": \"John Doe\",\"age\": 21}]")
     private List<Participant> participants;
 
     @NotNull(message = "Journey Id must be provided")
