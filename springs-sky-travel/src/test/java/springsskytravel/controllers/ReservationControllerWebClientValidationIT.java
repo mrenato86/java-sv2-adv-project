@@ -103,6 +103,21 @@ class ReservationControllerWebClientValidationIT {
     }
 
     @Test
+    void testCreateReservationWithInvalidDataInvalidParticipant() {
+        webClient.post()
+                .uri("/api/reservations")
+                .bodyValue(new CreateReservationCommand("Agent", Reservation.Service.NONE,
+                        List.of(new Participant("", -1)), 1L))
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ConstraintViolationProblem.class)
+                .value(problem -> assertThat(problem.getTitle())
+                        .isEqualTo("Constraint Violation"))
+                .value(problem -> assertThat(problem.getViolations())
+                        .hasSize(2));
+    }
+
+    @Test
     void testCreateReservationToPastJourney() {
         long romeId = journeyService.createJourney(
                 new CreateJourneyCommand("Rome", "Last minute", Journey.Method.BUS, LocalDate.now().minusDays(3), 1, 20_000)

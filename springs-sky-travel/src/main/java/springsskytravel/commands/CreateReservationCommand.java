@@ -8,6 +8,7 @@ import lombok.Setter;
 import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,7 +31,7 @@ public class CreateReservationCommand {
     @Size(min = 1, message = "At least one participant must be added")
     @NotNull(message = "Participant list must be present")
     @Schema(description = "List of participants", example = "[{\"name\": \"John Doe\",\"age\": 21}]")
-    private List<Participant> participants;
+    private List<@Valid Participant> participants;
 
     @NotNull(message = "Journey Id must be provided")
     @Schema(description = "Journey ID", example = "1")
