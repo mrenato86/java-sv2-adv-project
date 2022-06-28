@@ -1,6 +1,8 @@
 package springsskytravel.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -29,6 +31,8 @@ public class JourneyController {
     @GetMapping
     @Operation(summary = "Finds all journeys (optionally filtered) in a list")
     @ApiResponse(responseCode = "200", description = "Journey query successful")
+    @Parameter(name = "after", description = "Start date in 'yyyy-MM-dd' format", example = "2021-01-01")
+    @Parameter(name = "priceOrderBy", description = "Ordering by price", schema = @Schema(allowableValues = {"asc", "desc"}))
     public List<JourneyDto> readAllJourney(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> after, Optional<String> priceOrderBy) {
         return journeyService.readAllJourney(after, priceOrderBy);
     }
