@@ -31,7 +31,7 @@ public class JourneyController {
     @GetMapping
     @Operation(summary = "Finds all journeys (optionally filtered) in a list")
     @ApiResponse(responseCode = "200", description = "Journey query successful")
-    @Parameter(name = "after", description = "Start date in 'yyyy-MM-dd' format", example = "2021-01-01")
+    @Parameter(name = "after", description = "Start date in <code>yyyy-MM-dd</code> format", schema = @Schema(example = "2021-01-01"))
     @Parameter(name = "priceOrderBy", description = "Ordering by price", schema = @Schema(allowableValues = {"asc", "desc"}))
     public List<JourneyDto> readAllJourney(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> after, Optional<String> priceOrderBy) {
         return journeyService.readAllJourney(after, priceOrderBy);

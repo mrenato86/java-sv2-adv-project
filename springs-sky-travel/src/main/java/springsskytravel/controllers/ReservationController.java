@@ -2,6 +2,7 @@ package springsskytravel.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class ReservationController {
     @Operation(summary = "Finds all reservations (optionally filtered) in a list")
     @ApiResponse(responseCode = "200", description = "Reservation query successful")
     @Parameter(name = "onlyActive", description = "List only reservations for future journeys")
-    @Parameter(name = "groupSize", description = "Max participant number", example = "2")
+    @Parameter(name = "groupSize", description = "Max participant number", schema = @Schema(example = "2"))
     public List<ReservationDto> readAllReservation(Optional<Boolean> onlyActive, Optional<Integer> groupSize) {
         return reservationService.readAllReservation(onlyActive, groupSize);
     }
