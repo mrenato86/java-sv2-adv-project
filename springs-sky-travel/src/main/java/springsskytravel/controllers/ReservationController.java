@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import springsskytravel.commands.CreateReservationCommand;
 import springsskytravel.commands.UpdateReservationCommand;
-import springsskytravel.commands.UpdateReservationParticipantsCommand;
+import springsskytravel.commands.AddParticipantCommand;
 import springsskytravel.dtos.ReservationDto;
 import springsskytravel.services.ReservationService;
 
@@ -60,7 +60,7 @@ public class ReservationController {
     @ApiResponse(responseCode = "201", description = "Reservation has been updated")
     @ApiResponse(responseCode = "400", description = "Constraint violation")
     @ApiResponse(responseCode = "404", description = "Reservation not found")
-    public ReservationDto addParticipantToReservation(@PathVariable long id, @Valid @RequestBody UpdateReservationParticipantsCommand command) {
+    public ReservationDto addParticipantToReservation(@PathVariable long id, @Valid @RequestBody AddParticipantCommand command) {
         return reservationService.addParticipantToReservation(id, command);
     }
 

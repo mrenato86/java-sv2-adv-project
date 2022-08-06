@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import springsskytravel.commands.AddParticipantCommand;
 import springsskytravel.commands.CreateJourneyCommand;
 import springsskytravel.commands.CreateReservationCommand;
 import springsskytravel.commands.UpdateReservationCommand;
-import springsskytravel.commands.UpdateReservationParticipantsCommand;
 import springsskytravel.dtos.ReservationDto;
 import springsskytravel.model.Journey;
 import springsskytravel.model.Participant;
@@ -45,9 +45,9 @@ class ReservationControllerWebClientIT {
         ).getId();
 
         CreateReservationCommand hawaiiReservation = new CreateReservationCommand("Agent1", Reservation.Service.FULL_BOARD,
-                List.of(new Participant("Child", 10), new Participant("Adult", 28)), hawaiiId);
+                List.of(new AddParticipantCommand("Child", 10), new AddParticipantCommand("Adult", 28)), hawaiiId);
         CreateReservationCommand romeReservation = new CreateReservationCommand("Agent2", Reservation.Service.NONE,
-                List.of(new Participant("Adult", 38)), romeId);
+                List.of(new AddParticipantCommand("Adult", 38)), romeId);
 
         testReservationDto = webClient.post()
                 .uri("/api/reservations")
@@ -110,7 +110,7 @@ class ReservationControllerWebClientIT {
     @Test
     void testCreateReservation() {
         CreateReservationCommand newReservation = new CreateReservationCommand("Agent2", Reservation.Service.HALF_BOARD,
-                List.of(new Participant("Adult", 19)), testReservationDto.getJourney().getId());
+                List.of(new AddParticipantCommand("Adult", 19)), testReservationDto.getJourney().getId());
 
         webClient.post()
                 .uri("/api/reservations")
@@ -130,7 +130,7 @@ class ReservationControllerWebClientIT {
 
         webClient.post()
                 .uri("/api/reservations/{id}/participants", testReservationDto.getId())
-                .bodyValue(new UpdateReservationParticipantsCommand("Friend", 20))
+                .bodyValue(new AddParticipantCommand("Friend", 20))
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(ReservationDto.class)

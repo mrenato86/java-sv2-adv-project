@@ -13,7 +13,7 @@ import javax.validation.constraints.PositiveOrZero;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UpdateReservationParticipantsCommand {
+public class AddParticipantCommand {
 
     @NotBlank(message = "Name must be provided")
     @Schema(description = "Name of participant", example = "John Doe")

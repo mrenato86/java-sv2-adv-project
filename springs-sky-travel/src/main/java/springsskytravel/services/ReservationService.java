@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import springsskytravel.commands.CreateReservationCommand;
 import springsskytravel.commands.UpdateReservationCommand;
-import springsskytravel.commands.UpdateReservationParticipantsCommand;
+import springsskytravel.commands.AddParticipantCommand;
 import springsskytravel.dtos.ReservationDto;
 import springsskytravel.exceptions.JourneyNotFoundException;
 import springsskytravel.exceptions.ReservationDeleteNotAllowedException;
@@ -61,7 +61,7 @@ public class ReservationService {
         return modelMapper.map(reservationRepository.save(reservation), ReservationDto.class);
     }
 
-    public ReservationDto addParticipantToReservation(long id, UpdateReservationParticipantsCommand command) {
+    public ReservationDto addParticipantToReservation(long id, AddParticipantCommand command) {
         Reservation toUpdate = fetchReservationById(id);
         toUpdate.addParticipant(modelMapper.map(command, Participant.class));
         toUpdate.calculateFullPrice(reservationRuleSet);

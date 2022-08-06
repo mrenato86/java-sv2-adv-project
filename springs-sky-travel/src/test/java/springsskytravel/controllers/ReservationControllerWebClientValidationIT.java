@@ -6,13 +6,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.zalando.problem.violations.ConstraintViolationProblem;
+import springsskytravel.commands.AddParticipantCommand;
 import springsskytravel.commands.CreateJourneyCommand;
 import springsskytravel.commands.CreateReservationCommand;
 import springsskytravel.commands.UpdateReservationCommand;
-import springsskytravel.commands.UpdateReservationParticipantsCommand;
 import springsskytravel.dtos.ReservationDto;
 import springsskytravel.model.Journey;
-import springsskytravel.model.Participant;
 import springsskytravel.model.Reservation;
 import springsskytravel.services.JourneyService;
 
@@ -40,12 +39,12 @@ class ReservationControllerWebClientValidationIT {
         webClient.post()
                 .uri("/api/reservations")
                 .bodyValue(new CreateReservationCommand("Agent", Reservation.Service.NONE,
-                        List.of(new Participant("Adult", 38)), 100L))
+                        List.of(new AddParticipantCommand("Adult", 38)), 100L))
                 .exchange()
                 .expectStatus().isNotFound();
         webClient.post()
                 .uri("/api/reservations/{id}/participants", 100)
-                .bodyValue(new UpdateReservationParticipantsCommand("Friend", 20))
+                .bodyValue(new AddParticipantCommand("Friend", 20))
                 .exchange()
                 .expectStatus().isNotFound();
         webClient.put()
@@ -78,7 +77,7 @@ class ReservationControllerWebClientValidationIT {
         webClient.post()
                 .uri("/api/reservations")
                 .bodyValue(new CreateReservationCommand("", Reservation.Service.NONE,
-                        List.of(new Participant("Adult", 38)), 1L))
+                        List.of(new AddParticipantCommand("Adult", 38)), 1L))
                 .exchange()
                 .expectStatus().isBadRequest()
                 .expectBody(ConstraintViolationProblem.class)
@@ -107,7 +106,7 @@ class ReservationControllerWebClientValidationIT {
         webClient.post()
                 .uri("/api/reservations")
                 .bodyValue(new CreateReservationCommand("Agent", Reservation.Service.NONE,
-                        List.of(new Participant("", -1)), 1L))
+                        List.of(new AddParticipantCommand("", -1)), 1L))
                 .exchange()
                 .expectStatus().isBadRequest()
                 .expectBody(ConstraintViolationProblem.class)
@@ -124,7 +123,7 @@ class ReservationControllerWebClientValidationIT {
         ).getId();
 
         CreateReservationCommand romeReservation = new CreateReservationCommand("Agent2", Reservation.Service.NONE,
-                List.of(new Participant("Adult", 38)), romeId);
+                List.of(new AddParticipantCommand("Adult", 38)), romeId);
 
         webClient.post()
                 .uri("/api/reservations")
@@ -139,7 +138,7 @@ class ReservationControllerWebClientValidationIT {
 
         webClient.post()
                 .uri("/api/reservations/{id}/participants", testReservationDto.getId())
-                .bodyValue(new UpdateReservationParticipantsCommand("", -20))
+                .bodyValue(new AddParticipantCommand("", -20))
                 .exchange()
                 .expectStatus().isBadRequest()
                 .expectBody(ConstraintViolationProblem.class)
@@ -181,7 +180,7 @@ class ReservationControllerWebClientValidationIT {
         ).getId();
 
         CreateReservationCommand romeReservation = new CreateReservationCommand("Agent2", Reservation.Service.NONE,
-                List.of(new Participant("Adult", 38)), romeId);
+                List.of(new AddParticipantCommand("Adult", 38)), romeId);
 
         return webClient.post()
                 .uri("/api/reservations")
