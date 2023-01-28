@@ -1,4 +1,4 @@
-# Vizsgaremek
+# Spring's Sky Travel - Project
 
 ## Leírás
 
