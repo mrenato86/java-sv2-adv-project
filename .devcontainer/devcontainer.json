@@ -29,9 +29,8 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"vscjava.vscode-java-pack",
-				"GabrielBB.vscode-lombok",
-				"Pivotal.vscode-boot-dev-pack",
-				"humao.rest-client"
+				"humao.rest-client",
+				"vmware.vscode-boot-dev-pack"
 			]
 		}
 	},
