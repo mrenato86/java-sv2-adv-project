@@ -23,5 +23,4 @@ public interface JourneyRepository extends JpaRepository<Journey, Long> {
 
     @Query("select distinct j.destination from Journey j")
     Set<String> getDistinctDestinations();
-
 }

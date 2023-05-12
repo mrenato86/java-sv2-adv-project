@@ -13,4 +13,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("select r from Reservation r where :group is null or size(r.participants) <= :group")
     List<Reservation> getReservationsWithParticipantsLessThan(Optional<Integer> group);
+
 }
