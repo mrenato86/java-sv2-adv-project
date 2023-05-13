@@ -1,0 +1,99 @@
+GET http://localhost:8080/api/reservations
+Accept: application/json
+
+###
+GET http://localhost:8080/api/reservations?onlyActive=false&groupSize=3
+Accept: application/json
+
+###
+GET http://localhost:8080/api/reservations?groupSize=3
+Accept: application/json
+
+###
+GET http://localhost:8080/api/reservations?onlyActive=true
+Accept: application/json
+
+###
+GET http://localhost:8080/api/reservations/1
+Accept: application/json
+
+###
+POST http://localhost:8080/api/reservations
+Accept: application/json
+Content-Type: application/json
+
+{
+  "contactPerson": "Travel Agent",
+  "requestedService": "NONE",
+  "participants": [
+    {
+      "name": "Child",
+      "age": 10
+    },
+    {
+      "name": "Husband",
+      "age": 38
+    },
+    {
+      "name": "Wife",
+      "age": 36
+    }
+  ],
+  "journeyId": 1
+}
+
+###
+POST http://localhost:8080/api/reservations
+Accept: application/json
+Content-Type: application/json
+
+{
+"contactPerson": "",
+"requestedService": null,
+"participants": [],
+"journeyId": null
+}
+
+###
+POST http://localhost:8080/api/reservations/1/participants
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "New Participant",
+  "age": 21
+}
+
+###
+POST http://localhost:8080/api/reservations/1/participants
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "",
+  "age": -21
+}
+
+###
+PUT http://localhost:8080/api/reservations/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "requestedService": "HALF_BOARD"
+}
+
+###
+PUT http://localhost:8080/api/reservations/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "requestedService": null
+}
+
+###
+DELETE http://localhost:8080/api/reservations/1
+Accept: application/json
+
+###

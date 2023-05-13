@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1 id="title">Spring's Sky Travel - Project - Boot 3</h1>
+<p style="font-size:15px"><a href="/swagger-ui.html">Spring's Sky Travel: Swagger UI</a></p>
+<h2 id="le-r-s">Leírás</h2>
+<p>A projekt egy utazási irodát (Spring&#39;s Sky Travel) szimulál. Szervezett utazásokat, illetve az ezekhez kapcsolódó
+    foglalásokat kezeli, melyek utaslistát is tartalmaznak.</p>
+<hr>
+<h2 id="fel-p-t-s">Felépítés</h2>
+<h3 id="journey-entit-s">Journey entitás</h3>
+<p>A <code>Journey</code> entitás a következő attribútumokkal rendelkezik:</p>
+<ul>
+    <li><strong>id</strong> (Long, generated)</li>
+    <li><strong>destination</strong> (String, @NotBlank)</li>
+    <li><strong>description</strong> (String, @NotBlank)</li>
+    <li><strong>method</strong> (Enum, @NotNull)</li>
+    <li><strong>departureDate</strong> (LocalDate, @FutureOrPresent)</li>
+    <li><strong>number_of_nights</strong> (int, @Positive)</li>
+    <li><strong>price_per_participant</strong> (int, @Positive)</li>
+    <li><strong>reservations</strong> (List of <code>Reservation</code>)</li>
+</ul>
+<p>Végpontok:</p>
+<table>
+    <thead>
+    <tr>
+        <th>HTTP metódus</th>
+        <th>Végpont</th>
+        <th>Leírás</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET</td>
+        <td><code>&quot;/api/journeys&quot;</code></td>
+        <td>lekérdezi az összes utazást</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td><code>&quot;/api/journeys/{id}&quot;</code></td>
+        <td>lekérdez egy utazást <code>id</code> alapján</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td><code>&quot;/api/journeys/destinations&quot;</code></td>
+        <td>lekérdez az úti célok halmazát</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td><code>&quot;/api/journeys&quot;</code></td>
+        <td>létrehoz egy új utazást</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td><code>&quot;/api/journeys/{id}&quot;</code></td>
+        <td>frissít egy utazást <code>id</code> alapján</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td><code>&quot;/api/journeys/{id}&quot;</code></td>
+        <td>töröl egy utazást <code>id</code> alapján</td>
+    </tr>
+    </tbody>
+</table>
+<p>Az összes entitást lekérdező hívás paraméterezhető: megadható dátum, hogy mikortól élő utazásokat keressen (<code>after</code>),
+    illetve
+    kérhető ár szerinti növekvő/csökkenő rendezés (<code>priceOrderBy=desc/asc</code>).</p>
+<p>További működési elv, hogy nem hozható létre múltbéli utazás, törlés esetén pedig az utazáshoz tartozó összes
+    foglalás is törlődik.</p>
+<hr>
+<h3 id="reservation-entit-s">Reservation entitás</h3>
+<p>A <code>Reservation</code> entitás a következő attribútumokkal rendelkezik:</p>
+<ul>
+    <li><strong>id</strong> (Long, generated)</li>
+    <li><strong>contactPerson</strong> (String, @NotBlank)</li>
+    <li><strong>requestedService</strong> (Enum, @NotNull)</li>
+    <li><strong>fullPrice</strong> (int, calculated)</li>
+    <li><strong>participants</strong> (List of <code>Participant</code>, @Size(min = 1))</li>
+    <li><strong>journey</strong> (<code>Journey</code>)</li>
+</ul>
+<p>A <code>Participant</code> osztály attribútumai:</p>
+<ul>
+    <li><strong>name</strong> (String, @NotBlank)</li>
+    <li><strong>age</strong> (int, @Positive)</li>
+</ul>
+<p>A <code>Journey</code> és a <code>Reservation</code> entitások között kétirányú, 1-n kapcsolat van.</p>
+<p>Végpontok:</p>
+<table>
+    <thead>
+    <tr>
+        <th>HTTP metódus</th>
+        <th>Végpont</th>
+        <th>Leírás</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET</td>
+        <td><code>&quot;/api/reservations&quot;</code></td>
+        <td>lekérdezi az összes foglalást</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td><code>&quot;/api/reservations/{id}&quot;</code></td>
+        <td>lekérdez egy foglalást <code>id</code> alapján</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td><code>&quot;/api/reservations&quot;</code></td>
+        <td>léterhoz egy foglalást</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td><code>&quot;/api/reservations/{id}/participants&quot;</code></td>
+        <td>hozzáad egy utast a foglaláshoz <code>id</code> alapján</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td><code>&quot;/api/reservations/{id}&quot;</code></td>
+        <td>frissít egy foglalást <code>id</code> alapján</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td><code>&quot;/api/reservations/{id}&quot;</code></td>
+        <td>töröl egy foglalást <code>id</code> alapján</td>
+    </tr>
+    </tbody>
+</table>
+<p>Az összes entitást lekérdező hívás paraméterezhető: megadható egy logikai érték, hogy csak az aktív foglalásokat
+    keresse (<code>onlyActive</code>), illetve megadható egy szám, hogy hány fő alatti foglalásokat keresünk (<code>groupSize</code>).
+</p>
+<p>További működési elv, hogy új foglalás nem hozható létre múltbeli utazásra, illetve a teljes ár létrehozásnál,
+    frissítésnél is kiszámolásra, javításra kerül. Előírás még, hogy foglalás törlése adott nappal az indulás előtt nem
+    megengedett.</p>
+<hr>
+<h2 id="technol-giai-r-szletek">Technológiai részletek</h2>
+<p>A projekt egy háromrétegű alkalmazás (Repository, Service, Controller), mely adatbázisként MariaDb-t használ, melynek
+    migrációjáért a Flyway eszköz felelős. Beépítésre került az API tesztelésére szolgáló SwaggerUI felület. A
+    validálást a Hibernate Validation végzi, míg a szabványos hibakezelést a Zalando Problem megoldása adja.</p>
+<p>Az adatbázis felépítése:</p>
+<p><img src="db.png" alt="diagram"></p>
+<p>Az alkalmazás indítható Jar-ként, vagy építhető belőle rétegezett Docker container a mellékelt a Dockerfile
+    segítségével, továbbá Docker Compose-hoz is adva van a szükséges konfigurációs állomány.</p>
+<p>A foglalások szabályait, és az árszámítás módját bővíteni lehet a <code>ReservationRuleSet</code> interfész
+    implementálásval, esetleges bővítésével, így az üzleti logika adott keretek között rugalmas lehet, ha erre később
+    igény van.</p>
+<hr>
+
+</body>
+</html>
