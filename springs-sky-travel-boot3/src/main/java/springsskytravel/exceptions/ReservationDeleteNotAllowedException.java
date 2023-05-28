@@ -10,6 +10,6 @@ public class ReservationDeleteNotAllowedException extends AbstractThrowableProbl
         super(URI.create("reservations/delete-denied"),
                 "Forbidden",
                 Status.FORBIDDEN,
-                String.format("Reservation(id: %d) cannot be deleted, please contact support", id));
+                "Reservation(id: %d) cannot be deleted, please contact support".formatted(id));
     }
 }

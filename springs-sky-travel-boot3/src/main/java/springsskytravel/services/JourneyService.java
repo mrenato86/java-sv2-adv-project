@@ -10,7 +10,7 @@ import springsskytravel.exceptions.JourneyNotFoundException;
 import springsskytravel.model.Journey;
 import springsskytravel.repositories.JourneyRepository;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

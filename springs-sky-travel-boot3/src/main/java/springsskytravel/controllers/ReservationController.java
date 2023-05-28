@@ -14,7 +14,7 @@ import springsskytravel.commands.AddParticipantCommand;
 import springsskytravel.dtos.ReservationDto;
 import springsskytravel.services.ReservationService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

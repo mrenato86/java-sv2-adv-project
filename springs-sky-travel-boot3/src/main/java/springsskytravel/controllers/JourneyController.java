@@ -14,7 +14,7 @@ import springsskytravel.commands.UpdateJourneyCommand;
 import springsskytravel.dtos.JourneyDto;
 import springsskytravel.services.JourneyService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

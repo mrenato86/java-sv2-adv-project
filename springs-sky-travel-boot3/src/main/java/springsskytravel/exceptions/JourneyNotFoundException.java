@@ -10,6 +10,6 @@ public class JourneyNotFoundException extends AbstractThrowableProblem {
         super(URI.create("journeys/not-found"),
                 "Not Found",
                 Status.NOT_FOUND,
-                String.format("Journey not found: %d", id));
+                "Journey not found: %d".formatted(id));
     }
 }

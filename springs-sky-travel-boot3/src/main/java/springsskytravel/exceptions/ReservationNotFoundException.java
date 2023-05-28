@@ -10,6 +10,6 @@ public class ReservationNotFoundException extends AbstractThrowableProblem {
         super(URI.create("reservations/not-found"),
                 "Not Found",
                 Status.NOT_FOUND,
-                String.format("Reservation not found: %d", id));
+                "Reservation not found: %d".formatted(id));
     }
 }
