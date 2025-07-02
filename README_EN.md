@@ -81,6 +81,7 @@ Another operating principle is that new reservations cannot be created for past 
 The project is a three-layer application (Repository, Service, Controller), using MariaDB as its database. Flyway is responsible for its migrations. A SwaggerUI interface has been integrated for API testing. Validation is handled by Hibernate Validation, while standardized error handling is provided by Zalando Problem.
 
 Database structure:
+
 ![diagram](db.png)
 
 The application can be started as a Jar, or a layered Docker container can be built from it using the provided Dockerfile. Furthermore, the necessary configuration file for Docker Compose is also included.

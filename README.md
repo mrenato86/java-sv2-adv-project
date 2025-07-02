@@ -81,6 +81,7 @@ További működési elv, hogy új foglalás nem hozható létre múltbeli utaz�
 A projekt egy háromrétegű alkalmazás (Repository, Service, Controller), mely adatbázisként MariaDb-t használ, melynek migrációjáért a Flyway eszköz felelős. Beépítésre került az API tesztelésére szolgáló SwaggerUI felület. A validálást a Hibernate Validation végzi, míg a szabványos hibakezelést a Zalando Problem megoldása adja.
 
 Az adatbázis felépítése:
+
 ![diagram](db.png)
 
 
